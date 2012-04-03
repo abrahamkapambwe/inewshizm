@@ -1,0 +1,473 @@
+﻿@model List<News.Models.NewsComponents>
+@{
+    ViewBag.Title = "MainNews";
+    Layout = "~/Views/Shared/_Layoutnews.cshtml";
+}
+<div>
+    <ul>
+        @foreach (var l in Model)
+        {
+
+            if (l.Section == "Section 1")
+            {
+                if (l.Show)
+                {
+            <li id="@l.NewsID" >
+                <div class="contentnewli">
+                    <div>
+                        @if (l.Images.Count > 0)
+                        {
+                            <img  width="300px" height="230px"  alt="@l.NewsHeadline" src="@l.Images[0].Url" />
+
+                        }
+                    </div>
+                    <div>
+                        <h3>
+                            <a href="/Home/NewsDetails/ + @l.NewsID">@l.NewsHeadline</a>
+                        </h3>
+                    </div>
+                    <div>
+                        <div>@Html.Raw(System.Web.HttpUtility.HtmlDecode(l.NewsItem).Substring(0, 200))</div>
+                        ...<a href="/Home/NewsDetails/ + @l.NewsID">Read More</a></div>
+                    <div>@String.Format("{0:ddd, MMMM d, yyyy}", l.NewsAdded)
+                    </div>
+                </div>
+            </li>
+                }
+                else
+                {
+@* <li id="@l.NewsID" style="display:none">
+                <div>
+                    <div>
+                        @if (l.Images.Count > 0)
+                        {
+                            <img alt="@l.NewsHeadline" width="300px" height="230px" src="@l.Images[0].Url" />
+
+                        }
+                    </div>
+                    <div>
+                        <h2>@l.NewsHeadline
+                        </h2>
+                    </div>
+                    <div>
+                           <div>@Html.Raw(System.Web.HttpUtility.HtmlDecode(l.NewsItem).Substring(0,300))</div>...<a href="/Home/NewsDetails/ + @l.NewsID">Read
+                            More</a></div>
+                </div>
+            </li>*@
+                }
+            }
+
+        }
+    </ul>
+</div>
+@section NewItemsTopLeftRight
+{
+    <ul>
+        @foreach (var s in Model)
+        {
+            if (s.Section == "Section 2")
+            {
+            <li>
+                <div class="contentnewhead">
+                    <div class="contentnewheadline">
+                        <a  href="/Home/NewsDetails/ + @s.NewsID">@s.NewsHeadline</a>
+                    </div>
+                    <div class="contentnewheadline">
+                        @Html.Raw(System.Web.HttpUtility.HtmlDecode(s.NewsItem).Substring(0, 60))
+                    </div>
+                    <div>
+                        <div class="published">@String.Format("{0:ddd, MMMM d, yyyy}", s.NewsAdded)
+                        </div>
+                    </div>
+                </div>
+            </li>
+            }
+        }
+    </ul>
+}
+@section NewItemsBottomLeft
+{
+    <ul>
+        @foreach (var l in Model)
+        {
+            if (l.Section == "Section 3")
+            {
+            <li>
+                <div class="contentnewhead" style="clear: both">
+                    <div style="padding:5px">
+                        <div>
+                            <p>
+                                <a href="Home/NewsDetails/@l.NewsID" >@l.NewsHeadline</a></p>
+                            <p>
+                                @String.Format("{0:ddd, MMMM d, yyyy}", l.NewsAdded)</p>
+                        </div>
+                        <div>
+                            <table>
+                                <tr>
+                                    <td>
+                                        @if (l.Images.Count > 0)
+                                        {
+                                            <img src="@l.Images[0].Url"  width="65" height="65" alt="@l.NewsHeadline" />
+                                        }
+                                    </td>
+                                    <td valign="top">
+                                        <p>
+                                            @* @Html.Raw(System.Web.HttpUtility.HtmlDecode(l.NewsItem).Substring(0, 60))...*@
+                                        </p>
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </li>
+            }
+        }
+    </ul>
+}
+@section NewItemsBottomRight
+{
+    <ul>
+        @foreach (var l in Model)
+        {
+            if (l.Section == "Section 3")
+            {
+            <li>
+                <div class="contentnewhead" style="clear: both">
+                    <div style="float: left">
+                        @* <img src="@l.NewsID"  alt="" />*@
+                    </div>
+                    <div style="float: left">
+                        @l.NewsHeadline
+                    </div>
+                </div>
+            </li>
+            }
+        }
+    </ul>
+}
+@section NewItemsTopRight
+{
+    <ul class="ItemsRight">
+        @foreach (var l in Model)
+        {
+            if (l.Section == "Section 3")
+            {
+            <li>
+                <div class="contentnewhead" style="clear: both">
+                    <div style="float: left">
+                        @*   <img src="@l.NewsID"  alt="" />*@
+                    </div>
+                    <div style="float: left">
+                        <a href="Home/NewsDetails/@l.NewsID" >@l.NewsHeadline</a>
+                    </div>
+                </div>
+            </li>
+            }
+        }
+    </ul>
+}
+@section NewItemsBottomLeftBusiness
+{
+    <ul class="ItemsRight">
+        @foreach (var l in Model)
+        {
+            if (l.Section == "Section 7" && l.Area == "left")
+            {
+            <li>
+                <div class="contentnewhead" style="clear: both;height:100px">
+                    <div>
+                        <p>
+                            <a href="Home/NewsDetails/@l.NewsID" >@l.NewsHeadline</a></p>
+                        <p>
+                            @String.Format("{0:ddd, MMMM d, yyyy}", l.NewsAdded)</p>
+                    </div>
+                    <div style="float: left">
+                        <table>
+                            <tr>
+                                <td>
+                                    @if (l.Images.Count > 0)
+                                    {
+                                        <img src="@l.Images[0].Url"  width="65" height="65" alt="@l.NewsHeadline" />
+                                    }
+                                </td>
+                                <td valign="top">
+                                    <p>
+                                        @Html.Raw(System.Web.HttpUtility.HtmlDecode(l.NewsItem).Substring(0, 60))...
+                                    </p>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+            </li>
+            }
+        }
+    </ul>
+}
+@section NewItemsBottomRightBusiness
+{
+    <ul class="ItemsRight">
+        @foreach (var l in Model)
+        {
+            if (l.Section == "Section 7" && l.Area == "right")
+            {
+            <li>
+                <div class="contentnewhead" style="clear: both;height:100px">
+                    <div>
+                        <p>
+                            <a href="Home/NewsDetails/@l.NewsID" >@l.NewsHeadline</a></p>
+                        <p>
+                            @String.Format("{0:ddd, MMMM d, yyyy}", l.NewsAdded)</p>
+                    </div>
+                    <div style="float: left">
+                        <table>
+                            <tr>
+                                <td>
+                                    @if (l.Images.Count > 0)
+                                    {
+                                        <img src="@l.Images[0].Url"  width="65" height="65" alt="@l.NewsHeadline" />
+                                    }
+                                </td>
+                                <td valign="top">
+                                    <p>
+                                        @* @Html.Raw(System.Web.HttpUtility.HtmlDecode(l.NewsItem).Substring(0, 60))...*@
+                                    </p>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+            </li>
+            }
+        }
+    </ul>
+}
+@section NewItemsBottomLeftTechnology
+{
+    <ul class="ItemsRight">
+        @foreach (var l in Model)
+        {
+            if (l.Section == "Section 9" && l.Area == "left")
+            {
+            <li>
+                <div class="contentnewhead" style="clear: both;height:100px">
+                    <div>
+                        <p>
+                            <a href="Home/NewsDetails/@l.NewsID" >@l.NewsHeadline</a></p>
+                        <p>
+                            @String.Format("{0:ddd, MMMM d, yyyy}", l.NewsAdded)</p>
+                    </div>
+                    <div style="float: left">
+                        <table>
+                            <tr>
+                                <td>
+                                    @if (l.Images.Count > 0)
+                                    {
+                                        <img src="@l.Images[0].Url"  width="65" height="65" alt="@l.NewsHeadline" />
+                                    }
+                                </td>
+                                <td valign="top">
+                                    <p>
+                                        @* @Html.Raw(System.Web.HttpUtility.HtmlDecode(l.NewsItem).Substring(0, 60))...*@
+                                    </p>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+            </li>
+            }
+        }
+    </ul>
+}
+@section NewItemsBottomRightTechnology
+{
+    <ul class="ItemsRight">
+        @foreach (var l in Model)
+        {
+            if (l.Section == "Section 9" && l.Area == "right")
+            {
+            <li>
+                <div class="contentnewhead" style="clear: both;height:100px">
+                    <div>
+                        <p>
+                            <a href="Home/NewsDetails/@l.NewsID" >@l.NewsHeadline</a></p>
+                        <p>
+                            @String.Format("{0:ddd, MMMM d, yyyy}", l.NewsAdded)</p>
+                    </div>
+                    <div>
+                        <table>
+                            <tr>
+                                <td>
+                                    @if (l.Images.Count > 0)
+                                    {
+                                        <img src="@l.Images[0].Url"  width="65" height="65" alt="@l.NewsHeadline" />
+                                    }
+                                </td>
+                                <td valign="top">
+                                    <p>
+                                        @*      @Html.Raw(System.Web.HttpUtility.HtmlDecode(l.NewsItem).Substring(0, 60))...*@
+                                    </p>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+            </li>
+            }
+        }
+    </ul>
+}
+@section NewItemsBottomLeftSports
+{
+    <ul class="ItemsRight">
+        @foreach (var l in Model)
+        {
+            if (l.Section == "Section 8" && l.Area == "left")
+            {
+            <li>
+                <div class="contentnewhead" style="clear: both;height:100px">
+                    <div>
+                        <p>
+                            <a href="Home/NewsDetails/@l.NewsID" >@l.NewsHeadline</a></p>
+                        <p>
+                            @String.Format("{0:ddd, MMMM d, yyyy}", l.NewsAdded)</p>
+                    </div>
+                    <div>
+                        <table>
+                            <tr>
+                                <td>
+                                    @if (l.Images.Count > 0)
+                                    {
+                                        <img src="@l.Images[0].Url"  width="65" height="65" alt="@l.NewsHeadline" />
+                                    }
+                                </td>
+                                <td valign="top">
+                                    <p>
+                                        @*      @Html.Raw(System.Web.HttpUtility.HtmlDecode(l.NewsItem).Substring(0, 60))...*@
+                                    </p>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+            </li>
+            }
+        }
+    </ul>
+}
+@section NewItemsBottomRightSports
+{
+    <ul class="ItemsRight">
+        @foreach (var l in Model)
+        {
+            if (l.Section == "Section 8" && l.Area == "right")
+            {
+            <li>
+                <div class="contentnewhead" style="clear: both;height:100px">
+                    <div>
+                        <p>
+                            <a href="Home/NewsDetails/@l.NewsID" >@l.NewsHeadline</a></p>
+                        <p>
+                            @String.Format("{0:ddd, MMMM d, yyyy}", l.NewsAdded)</p>
+                    </div>
+                    <div>
+                        <table>
+                            <tr>
+                                <td>
+                                    @if (l.Images.Count > 0)
+                                    {
+                                        <img src="@l.Images[0].Url"  width="65" height="65" alt="@l.NewsHeadline" />
+                                    }
+                                </td>
+                                <td valign="top">
+                                    <p>
+                                        @*      @Html.Raw(System.Web.HttpUtility.HtmlDecode(l.NewsItem).Substring(0, 60))...*@
+                                    </p>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+            </li>
+            }
+        }
+    </ul>
+}
+@section NewItemsBottomLeftEntertainment
+{
+    <ul class="ItemsRight">
+        @foreach (var l in Model)
+        {
+            if (l.Section == "Section 6" && l.Area == "left")
+            {
+            <li>
+                <div class="contentnewhead" style="clear: both;height:100px">
+                    <div>
+                        <p>
+                            <a href="Home/NewsDetails/@l.NewsID" >@l.NewsHeadline</a></p>
+                        <p>
+                            @String.Format("{0:ddd, MMMM d, yyyy}", l.NewsAdded)</p>
+                    </div>
+                    <div>
+                        <table>
+                            <tr>
+                                <td>
+                                    @if (l.Images.Count > 0)
+                                    {
+                                        <img src="@l.Images[0].Url"  width="65" height="65" alt="@l.NewsHeadline" />
+                                    }
+                                </td>
+                                <td valign="top">
+                                    <p>
+                                        @*      @Html.Raw(System.Web.HttpUtility.HtmlDecode(l.NewsItem).Substring(0, 60))...*@
+                                    </p>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+            </li>
+            }
+        }
+    </ul>
+}
+@section NewItemsBottomRightEntertainment
+{
+    <ul class="ItemsRight">
+        @foreach (var l in Model)
+        {
+            if (l.Section == "Section 6" && l.Area == "right")
+            {
+            <li>
+                <div class="contentnewhead" style="clear: both;height:100px">
+                    <div>
+                        <p>
+                            <a href="Home/NewsDetails/@l.NewsID" >@l.NewsHeadline</a></p>
+                        <p>
+                            @String.Format("{0:ddd, MMMM d, yyyy}", l.NewsAdded)</p>
+                    </div>
+                    <div>
+                        <table>
+                            <tr>
+                                <td>
+                                    @if (l.Images.Count > 0)
+                                    {
+                                        <img src="@l.Images[0].Url"  width="65" height="65" alt="@l.NewsHeadline" />
+                                    }
+                                </td>
+                                <td valign="top">
+                                    <p>
+                                        @*      @Html.Raw(System.Web.HttpUtility.HtmlDecode(l.NewsItem).Substring(0, 60))...*@
+                                    </p>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+            </li>
+            }
+        }
+    </ul>
+}

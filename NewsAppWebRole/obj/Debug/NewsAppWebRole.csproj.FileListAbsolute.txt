@@ -1,0 +1,9 @@
+C:\inewshizm\NewsAppWebRole\bin\NewsAppWebRole.dll
+C:\inewshizm\NewsAppWebRole\bin\NewsAppWebRole.pdb
+C:\inewshizm\NewsAppWebRole\bin\Microsoft.Web.Infrastructure.dll
+C:\inewshizm\NewsAppWebRole\bin\log4net.xml
+C:\inewshizm\NewsAppWebRole\bin\Microsoft.Web.Infrastructure.xml
+C:\inewshizm\NewsAppWebRole\bin\PagedList.xml
+C:\inewshizm\NewsAppWebRole\obj\Debug\NewsAppWebRole.csprojResolveAssemblyReference.cache
+C:\inewshizm\NewsAppWebRole\obj\Debug\NewsAppWebRole.dll
+C:\inewshizm\NewsAppWebRole\obj\Debug\NewsAppWebRole.pdb

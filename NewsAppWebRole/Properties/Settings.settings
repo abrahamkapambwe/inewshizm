@@ -1,0 +1,21 @@
+﻿<?xml version='1.0' encoding='utf-8'?>
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="NewsAppWebRole.Properties" GeneratedClassName="Settings">
+  <Profiles />
+  <Settings>
+    <Setting Name="SouthAfricaVideo" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">southafricavideo</Value>
+    </Setting>
+    <Setting Name="KenyaVideo" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">kenyavideo</Value>
+    </Setting>
+    <Setting Name="DomainNameComment" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">commentsSA</Value>
+    </Setting>
+    <Setting Name="DomainNameZM" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">zambianews</Value>
+    </Setting>
+    <Setting Name="BucketName" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">rssnewsengine</Value>
+    </Setting>
+  </Settings>
+</SettingsFile>

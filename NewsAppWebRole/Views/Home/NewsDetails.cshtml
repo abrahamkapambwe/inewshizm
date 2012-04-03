@@ -1,0 +1,36 @@
+﻿@model News.Models.NewsComponents
+@{
+    ViewBag.Title = "NewDetails";
+    Layout = "~/Views/Shared/_Layoutdetails.cshtml";
+}
+<script type="text/javascript">
+    function OnSuccess(data) {
+
+        alert("This is complete callback :" + data);
+
+    }
+</script>
+<div>
+
+    <h2>@Model.NewsHeadline</h2>
+    <div>@Model.NewsAdded</div>
+    <div>@Html.Raw(System.Web.HttpUtility.HtmlDecode(Model.NewsItem))
+
+    </div>
+    <div>@Model.Source</div>
+
+</div>
+<div id="commentGrid">
+</div>
+<div id="commentSection" style="background-color: #d2d4d3">
+    <div>
+        <span style="color: #7b0100; font-weight: bold">Join the Conversation</span>
+    </div>
+   
+    <div style="background-color: #eeeeee">
+        <div>
+           @Html.Partial("_Comment")</div>
+        <div>
+        </div>
+    </div>
+</div>

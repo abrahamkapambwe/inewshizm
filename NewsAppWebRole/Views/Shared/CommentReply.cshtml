@@ -1,0 +1,28 @@
+﻿@model News.Models.NewsComponents
+@{
+    Layout = null;
+}
+@foreach (var c in Model.Comment)
+{
+           
+    <li>
+        <div>
+            <div class="comment">
+                @c.CommentItem
+            </div>
+            <div class="usename">
+                @c.UserName
+            </div>
+            <div>
+                <div class="commentAdded">
+                    @c.CommentAdded
+                </div>
+                <div class="commentMeta">
+                    <img src="" alt="Like" />
+                    <a href="#" class="RemoveLink"
+                                 data-id="@c.CommentID">Like</a>(<span id="@c.CommentID">@c.Likes</span>)</span> 
+                </div>
+            </div>
+        </div>
+    </li>
+}

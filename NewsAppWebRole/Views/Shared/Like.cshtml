@@ -1,0 +1,7 @@
+﻿@model RssNewsEngine.Models.NewsComponents
+
+@foreach (var c in Model.Comment)
+{
+    @c.CommentID
+    @c.NewsID
+}

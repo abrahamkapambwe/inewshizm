@@ -1,0 +1,46 @@
+﻿
+@using NewsAppWebRole.PagingHelper
+@model NewsAppWebRole.Models.NewsComponentViewModel
+           
+@{
+   
+    Layout = "~/Views/Shared/_Layoutothernews.cshtml";
+}
+<ul>
+    @foreach (var item in Model.NewsComponentses)
+    {
+        <li>
+            <div class="contentnewhead" style="clear: both">
+                <div style="padding: 5px">
+                    <div>
+                        <p>
+                            <a href="Home/NewsDetails/@item.NewsID" >@item.NewsHeadline</a></p>
+                        <p>
+                            @String.Format("{0:ddd, MMMM d, yyyy}", item.NewsAdded)</p>
+                    </div>
+                    <div>
+                        <table>
+                            <tr>
+                                <td>
+                                    @if (item.Images.Count > 0)
+                                    {
+                                        <img src="@item.Images[0].Url"  width="65" height="65" alt="@item.NewsHeadline" />
+                                    }
+                                </td>
+                                <td valign="top">
+                                    <p>
+                                        @* @Html.Raw(System.Web.HttpUtility.HtmlDecode(l.NewsItem).Substring(0, 60))...*@
+                                    </p>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </li>  
+    }
+</ul>
+<div class="pager">
+    
+    @Html.PageLinks(Model.PagingInfo, x => Url.Action("List", new {page = x}))
+</div>

@@ -1,0 +1,181 @@
+﻿@*@using PagedList.PagedList*@<News.Models.NewsComponents.>
+@model News.Models.NewsComponents
+@{
+    AjaxOptions ajaxOpts = new AjaxOptions
+    {
+        UpdateTargetId = "updateComment",
+        Url = Url.Action("CommentReply", "Home"),
+        InsertionMode = InsertionMode.InsertAfter,
+        OnSuccess = "HideForm"
+    };
+    
+}
+@{
+    AjaxOptions ajaxOptComment = new AjaxOptions
+    {
+        UpdateTargetId = "updateComment",
+        HttpMethod = "Post",
+        Url = Url.Action("Comment", "Home"),
+        InsertionMode = InsertionMode.InsertBefore
+    };
+    
+}
+<div>
+</div>
+<div>
+    <script type="text/javascript">
+        function HideForm(data) {
+            debugger;
+
+        }
+        $(function () {
+            // Document.ready -> link up remove event handler
+            $(".RemoveLink").click(function () {
+
+                // Get the id from the link
+                var commentId = $(this).attr("data-id");
+                var like = $('#' + commentId).text();
+                if (commentId != '') {
+                    // Perform the ajax post
+                    $.post("/Home/Like", { "like": like, "commentId": commentId },
+                    function (data) {
+                        // Successful requests get here
+                        // Update the page elements
+                        $('#' + commentId).text(data.like);
+
+                        //                        if (data.ItemCount == 0) {
+                        //                            $('#row-' + data.DeleteId).fadeOut('slow');
+                        //                        } else {
+                        //                            $('#item-count-' + data.DeleteId).text(data.ItemCount);
+                        //                        }
+                        //                        $('#cart-total').text(data.CartTotal);
+                        //                        $('#update-message').text(data.Message);
+                        //                        $('#cart-status').text('Cart (' + data.CartCount + ')');
+                    });
+                }
+            });
+
+            $(".Reply").click(function () {
+
+
+                var cookie = document.cookie;
+                var username = $(this).attr("data-id");
+                if (cookie != '') {
+                    $('#' + username).show();
+                } else {
+
+
+                }
+
+            });
+
+        });
+    </script>
+    <div>
+        <div id="Register" style="display: none">
+        </div>
+        <div id="login" style="display: none">
+        </div>
+    </div>
+    <ul id="updateComment">
+    </ul>
+    <ul class="commentboder">
+        @foreach (var c in Model.Comment)
+        {
+            <li class="commentItem">
+                <div>
+                    <div class="comment">
+                        @c.CommentItem
+                    </div>
+                    <div class="usename">
+                        Posted by <span style="color: Blue">@c.UserName</span>
+                    </div>
+                    <div>
+                        <div class="commentAdded">
+                            @c.CommentAdded
+                        </div>
+                        <div class="commentMeta">
+                            <span>
+                                <img src="" alt="Like" />
+                                <a href="#" class="RemoveLink"
+                                   data-id="@c.CommentID">Like</a>(<span id="@c.CommentID">@c.Likes</span>)</span>
+                            <span><a href="#" class="Reply" data-id="@c.UserName">
+                                      <img src="" alt="Reply" />Reply</a></span>
+                            @using (Ajax.BeginForm(ajaxOpts))
+                            {<div style="display: none" id="@c.UserName">
+                                 <div>
+                                     Reply to @c.UserName
+                                 </div>
+                                 <div>
+                                     Comment
+                                 </div>
+                                 <input type="hidden" name="NewsID" id="newsID" value="@Model.NewsID" />
+                                 <input type="hidden" name="username" id="username" value="@c.UserName" />
+                                 <input type="hidden" name="commentId" id="commentId" value="@c.CommentID" />
+                                 <div>
+                                     <textarea id="commentreply" name="commentreply" rows="2" cols="20"></textarea>
+                                 </div>
+                                 <div>
+                                     <input id="Submit" name="Submit" type="submit" />
+                                 </div>
+                             </div>
+                            }
+                        </div>
+                    </div>
+                </div>
+                <div>
+                </div>
+                <ul id="UpdateTarget">
+                    @*@Html.Action("CommentReply")*@
+                    @foreach (var r in c.commentReply)
+                    {
+                
+                        <li>
+                            <div>
+                                <div class="comment">
+                                    @r.CommentItem
+                                </div>
+                                <div class="usename">
+                                    @r.UserName
+                                </div>
+                                <div>
+                                    <div class="commentAdded">
+                                        @r.CommentAdded
+                                    </div>
+                                    <div class="commentMeta">
+                                        <span><a href="#" onclick="">
+                                                  <img src="" alt="Like" />Like </a>(<span id="@c.CommentID">@c.Likes</span>)
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                    }
+                </ul>
+            </li>
+           
+           
+        }
+    </ul>
+    <div><div>
+   @* @Html.Pager(Model.PageSize, Model.PageNumber, Model.TotalItemCount)*@
+</div></div>
+    <div class="commentboder">
+        @using (Ajax.BeginForm(ajaxOptComment))
+        {
+
+            <div class="commentContainer">
+                <div style="margin-bottom: 15px">
+                    Comment
+                </div>
+                <input type="hidden" name="NewsID" id="NewsID" value="@Model.NewsID" />
+                <div>
+                    <textarea id="CommentItem" name="CommentItem" rows="2" cols="20"></textarea>
+                </div>
+                <div style="margin-top: 15px">
+                    <input id="SubmitForm" name="Submit" value="Submit" type="submit" />
+                </div>
+            </div>
+        }
+    </div>
+</div>

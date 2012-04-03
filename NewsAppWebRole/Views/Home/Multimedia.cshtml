@@ -1,0 +1,47 @@
+﻿@using Microsoft.Web.Helpers
+@model List<News.Models.Multimedia>
+@{
+    ViewBag.Title = "Multimedia";
+    Layout = "~/Views/Shared/_Layoutmultimedia.cshtml";
+}
+
+<ul>
+    <li>News</li>
+    @foreach (var items in Model)
+    {
+        if (items.Category == "News")
+        {
+        <li>
+            <div>@Video.Flash(path: items.YoutubeUrl,
+                 width: "400",
+                 height: "600",
+                 play: true,
+                 loop: true,
+                 menu: false,
+                 bgColor: "red",
+                 quality: "medium",
+                 scale: "exactfit",
+                 windowMode: "transparent")
+
+            </div>
+            <div>
+            </div>
+        </li>
+        }
+    }
+</ul>
+<ul>
+    <li>Comic</li>
+    @foreach (var i in Model)
+    {
+        if (i.Category == "Comic")
+        {
+        <li>
+            <div>
+            </div>
+            <div>
+            </div>
+        </li>
+        }
+    }
+</ul>
